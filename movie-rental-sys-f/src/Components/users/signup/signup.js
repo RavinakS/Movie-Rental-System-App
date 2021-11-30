@@ -1,5 +1,5 @@
-import react, {useState} from "react";
-import './signUp.css';
+import React, {useState} from "react";
+import './signup.css';
 import axios from "axios";
 
 const Signup = () =>{
@@ -26,7 +26,7 @@ const Signup = () =>{
             axios.post("http://localhost:3040/create-account", user)
             .then((res)=>{
                 alert(res.data.message);
-            })
+            }).catch(error =>  console.error(error))
         }else{
             alert("Invalid Inputs");
         }

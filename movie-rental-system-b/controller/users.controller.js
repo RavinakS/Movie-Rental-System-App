@@ -4,7 +4,7 @@ const {createToken} = require('./utils/token');
 
 //Creating account 
 exports.sign_up = async (req, res) =>{
-
+    console.log(req.body);
     // validate user details
     let userInfo = {
         name: req.body.name,

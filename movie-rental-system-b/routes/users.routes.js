@@ -5,7 +5,7 @@ const {sign_up, login, user_profile, allUsersInfo} = require('../controller/user
 const {hashPass, comparePass} = require('../controller/middlewares/password');
 const {auth_for_users} = require('../controller/middlewares/user_auth');
 
-router.post('/create-account', hashPass, sign_up);
+router.post('/create-account', sign_up);
 
 router.get('/login', comparePass, login);
 
