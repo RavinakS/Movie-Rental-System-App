@@ -1,8 +1,10 @@
 import axios from "axios";
 import React, {useState} from "react";
-import './login.css'
+import './login.css';
+import { useNavigate } from "react-router";
 
 const Login = () =>{
+    let navigate = useNavigate();
 
     const [user, setUser] = useState({
         email: "",
@@ -40,7 +42,9 @@ const Login = () =>{
 
             <div>or</div>
 
-            <div className="button">Signup</div>
+            <div className="button" onClick={()=>{
+                navigate('/create-account')
+            }} >Signup</div>
         </div>
     )
 }

@@ -1,8 +1,10 @@
 import React, {useState} from "react";
 import './signup.css';
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 export default function Signup(){
+    let navigate = useNavigate();
 
     const [user, setUser] = useState({
         name: "",
@@ -23,7 +25,7 @@ export default function Signup(){
         if(name && email && password){
             try{
                 let res = await axios.post("http://localhost:3040/create-account", user);
-                alert(res.data.message);
+                alert(res.message);
             }catch(error){
                 alert(error.response.data.message);
             }
@@ -41,7 +43,9 @@ export default function Signup(){
             <input type="password" name = "password" value = {user.password} placeholder="Password" onChange = { handleChange }></input>
             <button className="button" onClick = {signUp}>Signup</button>
             <div>or</div>
-            <div className="button">Login</div>
+            <div className="button" onClick = {()=>{
+                navigate("/login")
+            }} >Login</div>
         </div>
     )
 };

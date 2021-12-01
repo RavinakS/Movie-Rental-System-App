@@ -30,6 +30,7 @@ exports.sign_up = async (req, res) =>{
 exports.login = async (req, res)=>{
     try{
         if(req.validPassword === "noUser"){
+            console.log(error_messages.not_exist);
             return res.json(404).json(error_messages.not_exist);
 
         }else if(req.validPassword){
@@ -44,6 +45,7 @@ exports.login = async (req, res)=>{
             console.log("Logged is SuccessFully.");
             res.status(201).json(responses.succeeded);
         }else{
+            console.log(error_messages.wrong_pass);
             res.status(400).json(error_messages.wrong_pass);
         }
 

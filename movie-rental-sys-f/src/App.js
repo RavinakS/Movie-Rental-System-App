@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react';
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
 
 import Homepage from './Components/users/homepage/homepage';
 import Login from './Components/users/login/login';
@@ -11,7 +11,6 @@ export default function App() {
   return (
     <div className="App">
       <Router>
-        {/* <Navbar /> */}
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path='/create-account' element={<Signup />} />
