@@ -38,7 +38,7 @@ export default function Signup(){
             <h1>Signup</h1>
             <input type="text" name = "name" value = {user.name} placeholder="Your Name" onChange = { handleChange }></input>
             <input type="text" name = "email" value = {user.email} placeholder="Your Email" onChange = { handleChange }></input>
-            <input type="text" name = "password" value = {user.password} placeholder="Password" onChange = { handleChange }></input>
+            <input type="password" name = "password" value = {user.password} placeholder="Password" onChange = { handleChange }></input>
             <button className="button" onClick = {signUp}>Signup</button>
             <div>or</div>
             <div className="button">Login</div>

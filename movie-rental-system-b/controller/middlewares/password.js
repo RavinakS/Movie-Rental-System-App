@@ -11,7 +11,7 @@ exports.hashPass = async (req, res, next) =>{
 
     }catch(err){
         res.send(err);
-        next();
+        next()
     }
 }
 
@@ -25,7 +25,7 @@ exports.comparePass = async (req, res, next) =>{
     }catch(err){
         req.validPassword = 'noUser';
         // res.send({status: "User not exist.", message: "Create Account (signUp)"});
-        next();
+        next()
     }
 }
 

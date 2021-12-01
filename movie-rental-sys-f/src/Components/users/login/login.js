@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, {useState} from "react";
 import './login.css'
 
@@ -16,14 +17,29 @@ const Login = () =>{
         })
     }
 
+    const login = async () =>{
+        let {email, password} = user;
+        if(email, password){
+            try{
+                let res = await axios.post('http://localhost:3040/login', user);
+                alert(res.data.message);
+            }catch(err){
+                console.log(err);
+                alert(err.data.message);
+            }
+        }
+    }
+
     return (
         <div className="login">
-            {console.log("user", user)}
             <h1>Login</h1>
             <input type="text" name = "email" value = {user.email} onChange = { handleChange } placeholder="Enter your Email"></input>
-            <input type="text" name = "password" value = {user.password} onChange = { handleChange } placeholder="Enter the password"></input>
-            <button className="button">Login</button>
+            <input type="password" name = "password" value = {user.password} onChange = { handleChange } placeholder="Enter the password"></input>
+
+            <button className="button" onClick = {login}>Login</button>
+
             <div>or</div>
+
             <div className="button">Signup</div>
         </div>
     )
