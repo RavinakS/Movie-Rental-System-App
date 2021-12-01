@@ -2,12 +2,14 @@ require('dotenv').config();
 require('./model/dbConnection.model');
 const express = require('express');
 const app = express();
+
 const cors = require('cors');
+app.use(cors());
+
 const logger = require('morgan');
-app.use(logger());
-app.use(cors);
+app.use(logger('dev'));
+
 app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
 
 const users = require('./routes/users.routes');
 app.use('/', users);
@@ -22,5 +24,5 @@ const pagination = require('./routes/pagination.routes');
 app.use('/', pagination);
 
 app.listen(3040, (req, res)=>{
-    console.log("Server is on..");
+    console.log("3040 Server is on..");
 })
