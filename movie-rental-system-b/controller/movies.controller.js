@@ -1,53 +1,50 @@
 const { movieValidation } = require('./utils/schemaValidation');
-const {allMovies, addMovie, searchMovieByGenre, filterByReleaseDate, updateMovie, deleteMovie} = require('../services/movies.services');
+const {allMovies, addMovie, searchMovie, updateMovie, deleteMovie} = require('../services/movies.services');
 const {responses, error_messages} = require('../controller/utils/constants');
 
-// Home Page
-// Search movie by a genre
-exports.search_movie_by_genre = async (req, res) =>{
-    genre = req.params.genre;
-    if(genre === undefined){
-        return res.status(400).send({status_code: 400, error_msg: "Please provide a genere you wanna search with."})
-    }
-    try{
-        movies = await searchMovieByGenre(genre);
-        if(movies.length === 0){
-            return res.status(404).send({status_code: 404, message: "Not Available."});
+exports.search_movie = async (req, res) =>{
+    data = req.query;
+    let not_found = 0
+    let movie_array = []
+    for(let key in req.query){
+        search_data = req.query[key];
+        if(search_data !== undefined){
+            try{
+                var movies = await searchMovie();
+                if(movies.length === 0){
+                    not_found = not_found + 1;
+                }else if(movies.length > 0){
+                    for(let movie in movies){
+                        if(movie["name"]=== search_data){
+                            movie_array.push(movie);
+                        }if(movie["releasDate"] === search_data){
+                            movie_array.push(movie);
+                        }if(movie["genre"] === search_data){
+                            movie_array.push(movie);
+                        }
+                    }
+                    return res.status(200).send({status_code: 200, data: movies});
+                }
+            }catch(err){
+                return res.send(err);
+            }
         }
-        res.status(200).send({status_code: 200, data: movies});
-    }catch(err){
-        console.log(err);
-        res.send(err);
+    }
+    size = Object.keys(data).length;
+    if(size === 0){
+        res.status(400).send(error_messages.required);
+    }else if(not_found > 0){
+        res.status(404).send(error_messages.not_exist);
     }
 }
 
-// search movie by release date
-exports.filter_by_release_date = async (req, res) =>{
-    let r_date = req.body.releasDate;
-    if(r_date === undefined){
-        return res.status(400).send({status_code: 400, error_msg: "Please provide release date you wanna search."})
-    }
-    try{
-        let movies = await filterByReleaseDate(r_date);
-        if(movies.length === 0){
-            return res.status(404).send({status_code: 404, message: "Couldn't Find."});
-        }
-        res.status(200).send({status_code: 200, data: movies});
-    }catch(err){
-        console.log(err);
-        res.send(err);
-    }
-} 
 
-
-// Show all movies.
 exports.all_movies = async (req, res) =>{
     movies = await allMovies();
     res.status(200).send({status_code: 200, data: movies});
 }
 
 
-//Adding a movie to in App
 exports.add_movie = async (req, res) =>{
     movieDetails = req.admin;
     try{
@@ -63,16 +60,13 @@ exports.add_movie = async (req, res) =>{
 }
 
 exports.update_movie = async (req, res) =>{
-    //checking user role through middleware
     movieDetails = req.admin;
 
-    //validate movie details
     validated = await movieValidation.validate(movieDetails);
     if(validated.error){
         return res.status(400).send({status_code: 400, error: validated.error.details[0].message});
     }
 
-    // Updating the movie details
     try{
         update = await updateMovie(req.body.name, movieDetails);
         if(update.matchedCount===0){

@@ -8,12 +8,8 @@ exports.addMovie = (movieData) =>{
     return movies.create(movieData);
 }
 
-exports.searchMovieByGenre = (genre) =>{
-    return movies.find({genre:genre});
-}
-
-exports.filterByReleaseDate = (date) =>{
-    return movies.find({releasDate: date});
+exports.searchMovie = (identity) =>{
+    return movies.find();
 }
 
 exports.avalRentsMovieByName = (m_name) =>{
