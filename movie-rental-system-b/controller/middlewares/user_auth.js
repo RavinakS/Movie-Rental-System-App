@@ -4,11 +4,7 @@ exports.user_auth_for_movie = async function(req, res, next){
     try{
         token = req.headers.cookie.split("=")[1];
         userInfo = await verifyToken(token);
-        if(userInfo === 'err'){
-            console.log('Token error');
-            res.send({error: "Sorry! something is worng in our side", message:"we will get back to you soon."});
-            return next();
-        }
+        
         role = userInfo["role"].toLowerCase();
         if(role === 'admin'){
             movieDetails = {

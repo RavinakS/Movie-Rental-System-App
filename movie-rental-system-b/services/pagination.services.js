@@ -1,4 +1,4 @@
-const { movies } = require('../model/dbSchema.model');
+const { movies } = require('../model/movies.model');
 
 exports.getAllMovies = function(){
     return movies.find({});

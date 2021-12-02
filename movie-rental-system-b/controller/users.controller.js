@@ -30,8 +30,7 @@ exports.sign_up = async (req, res) =>{
 exports.login = async (req, res)=>{
     try{
         if(req.validPassword === "noUser"){
-            console.log(error_messages.not_exist);
-            return res.json(404).json(error_messages.not_exist);
+            return res.status(404).json(error_messages.not_exist);
 
         }else if(req.validPassword){
             userData = await userDetailsById(req.body.email);

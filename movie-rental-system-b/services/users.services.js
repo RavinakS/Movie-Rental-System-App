@@ -1,4 +1,4 @@
-const { users } = require('../model/dbSchema.model');
+const { users } = require('../model/user.model');
 
 exports.signUp = (userData) =>{
     return users.create(userData);
@@ -17,5 +17,5 @@ exports.updateUserRent = (user, rents) =>{
 }
 
 exports.allUsersData = () =>{
-    return users.find();
+    return users.find({}, {__v:0, password:0});
 }

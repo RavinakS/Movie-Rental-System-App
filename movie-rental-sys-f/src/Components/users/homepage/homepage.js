@@ -6,11 +6,13 @@ const Homepage = () =>{
     let navigate = useNavigate();
 
     return (
-        <div className="homepage">
-            <h1>Hello Home-Page</h1>
-            <div className="button" onClick={()=>{
-                navigate('/login')
-            }} >Logout</div>
+        <div className="App">
+            <div className="homepage">
+                <h1>Hello Home-Page</h1>
+                <div className="button" onClick={()=>{
+                    navigate('/login')
+                }} >Logout</div>
+            </div>
         </div>
     )
 }
