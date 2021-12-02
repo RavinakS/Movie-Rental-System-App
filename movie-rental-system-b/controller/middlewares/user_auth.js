@@ -1,10 +1,11 @@
 const {verifyToken} = require('../utils/token');
+const {responses, error_messages} = require('../utils/constants');
 
 exports.user_auth_for_movie = async function(req, res, next){
     try{
         token = req.headers.cookie.split("=")[1];
         userInfo = await verifyToken(token);
-        
+
         role = userInfo["role"].toLowerCase();
         if(role === 'admin'){
             movieDetails = {
@@ -16,15 +17,12 @@ exports.user_auth_for_movie = async function(req, res, next){
             req.admin = movieDetails;
             next()
         }else{
-            res.status(401).send({status_code: 401, message: "Sorry! you don't have access to add a movie."});
-            return next()
+            res.status(401).send(error_messages.un_authorized);
         }
     }catch(err){
 
         // user needs to login (retun to login page)
-        console.log(err);
-        res.status(404).send("**Login/Signup Page**");
-        return next();
+        res.status(404).send(error_messages.not_exist);
     }
 }
 

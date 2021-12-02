@@ -26,7 +26,7 @@ exports.movieValidation = async (req, res, next) =>{
 
     let validated = await schema.validate(req.body);
     if(validated.error){
-        res.status(400).send({status_code: 400, error: validated.error.details[0].message});
+        res.status(400).send({status_code: 400, message: validated.error.details[0].message});
     }else{
         req.validated = true;
         next()
