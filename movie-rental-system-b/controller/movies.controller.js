@@ -53,8 +53,6 @@ exports.update_movie = async (req, res) =>{
         let rents = movieDetails.avalCD;
         let newRents = parseInt(avalCD);
         if(newRents >= rents){
-            // rents = {};
-            // console.log(rents);
             let updates = {
                 name: name,
                 releasDate: releasDate, 
