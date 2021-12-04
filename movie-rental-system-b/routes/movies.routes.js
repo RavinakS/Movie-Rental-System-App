@@ -12,10 +12,10 @@ router.get('/all-movies', all_movies);
 router.post('/add-movie', user_auth_for_movie, movieValidation, add_movie);
 
 // search movie with a genere
-router.get('/filter', search_movie);
+router.get('/search', search_movie);
 
 // update movie details
-router.put('/update-movie', user_auth_for_movie, update_movie);
+router.put('/update-movie', user_auth_for_movie, movieValidation, update_movie);
 
 //delete a movie
 router.delete('/delete-movie/:name', auth_for_users, delete_movie);

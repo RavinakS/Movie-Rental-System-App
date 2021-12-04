@@ -8,13 +8,7 @@ exports.user_auth_for_movie = async function(req, res, next){
 
         role = userInfo["role"].toLowerCase();
         if(role === 'admin'){
-            movieDetails = {
-                name: req.body.name,
-                releasDate: req.body.releasDate,
-                genre: req.body.genre,
-                avalCD: req.body.avalCD
-            }
-            req.admin = movieDetails;
+            req.admin = req.query;
             next()
         }else{
             res.status(401).send(error_messages.un_authorized);
@@ -22,7 +16,7 @@ exports.user_auth_for_movie = async function(req, res, next){
     }catch(err){
 
         // user needs to login (retun to login page)
-        res.status(404).send(error_messages.not_exist);
+        res.status(404).send(error_messages.login_page);
     }
 }
 

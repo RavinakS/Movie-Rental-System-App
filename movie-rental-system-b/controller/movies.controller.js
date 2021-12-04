@@ -1,36 +1,20 @@
-const { movieValidation } = require('./utils/schemaValidation');
-const {allMovies, addMovie, searchMovie, updateMovie, deleteMovie} = require('../services/movies.services');
+const {allMovies, addMovie, searchMovie, updateMovie, deleteMovie, getMovieByName} = require('../services/movies.services');
 const {responses, error_messages} = require('../controller/utils/constants');
 
 exports.search_movie = async (req, res) =>{
     data = req.query;
-    let not_found = 0
-    let movie_array = []
-    for(let key in req.query){
-        search_data = req.query[key];
+    for(let key in data){
+        search_data = data[key];
         if(search_data !== undefined){
             try{
-                var movies = await searchMovie();
-                if(movies.length === 0){
-                    not_found = not_found + 1;
-                }else if(movies.length > 0){
-                    for(let movie in movies){
-                        if(movie["name"]=== search_data){
-                            movie_array.push(movie);
-                        }if(movie["releasDate"] === search_data){
-                            movie_array.push(movie);
-                        }if(movie["genre"] === search_data){
-                            movie_array.push(movie);
-                        }
-                    }
-                    return res.status(200).send({status_code: 200, data: movies});
-                }
+                var movies = await searchMovie(search_data);
+                res.send(movies);
             }catch(err){
                 return res.send(err);
             }
         }
     }
-    size = Object.keys(data).length;
+    size = Object.keys(req.query).length;
     if(size === 0){
         res.status(400).send(error_messages.required);
     }else if(not_found > 0){
@@ -60,19 +44,30 @@ exports.add_movie = async (req, res) =>{
 }
 
 exports.update_movie = async (req, res) =>{
-    movieDetails = req.admin;
-
-    validated = await movieValidation.validate(movieDetails);
-    if(validated.error){
-        return res.status(400).send({status_code: 400, error: validated.error.details[0].message});
-    }
-
-    try{
-        update = await updateMovie(req.body.name, movieDetails);
-        if(update.matchedCount===0){
+    try{ 
+        let {name, releasDate, genre, avalCD} = req.query;
+        movieDetails = await getMovieByName(name);
+        if(movieDetails===null){
             return res.status(404).send({status_code: 404, error_msg: "Couldn't find the movie."})
         }
-        res.status(201).send({status_code: 201, message: "Updated Successfully."});
+        let rents = movieDetails.avalCD;
+        let newRents = parseInt(avalCD);
+        if(newRents >= rents){
+            // rents = {};
+            // console.log(rents);
+            let updates = {
+                name: name,
+                releasDate: releasDate, 
+                genre: genre,
+            }
+            update = await updateMovie(name, updates, newRents);
+            // if(update.matchedCount===0){
+            //     return res.status(404).send({status_code: 404, error_msg: "Couldn't find the movie."})
+            // }
+            res.status(201).send({status_code: 201, message: "Updated Successfully."});
+        }else{
+            res.status(408).send({status_code: 408, message: `available CDs should be >= ${rents}`});
+        }
     }catch(err){
         console.log(err);
         res.send(err);

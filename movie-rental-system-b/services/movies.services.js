@@ -8,8 +8,8 @@ exports.addMovie = (movieData) =>{
     return movies.create(movieData);
 }
 
-exports.searchMovie = (identity) =>{
-    return movies.find();
+exports.searchMovie = async (identity) =>{
+    return await movies.find({$or: [{ name: identity }, { genre: identity } ]})
 }
 
 exports.avalRentsMovieByName = (m_name) =>{
@@ -20,10 +20,15 @@ exports.getMovieByName = (m_name) =>{
     return movies.findOne({name: m_name});
 }
 
-exports.updateMovie = (m_name, m_details) =>{
-    return movies.updateOne({name: m_name}, {$set: m_details});
+exports.updateMovie = async (m_name, m_details, rents) =>{
+    await movies.updateOne({name: m_name}, {$inc: {avalCD: rents}});
+    return await movies.updateOne({name: m_name}, {$set: m_details});
 }
 
 exports.deleteMovie = (m_name) =>{
     return movies.deleteOne({name: m_name});
+}
+
+exports.updateMovieRents = (m_name, inc_num) =>{
+    return movies.updateOne({name: m_name}, {$inc: {avalCD: inc_num}});
 }
