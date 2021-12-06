@@ -25,6 +25,7 @@ const Login = () =>{
             try{
                 let res = await axios.post('http://localhost:3040/login', user);
                 alert(res.data.message);
+                navigate('/movie-page');
             }catch(err){
                 alert(err.response.data.message);
             }

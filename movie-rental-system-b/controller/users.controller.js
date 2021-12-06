@@ -39,7 +39,10 @@ exports.login = async (req, res)=>{
                 role: userData[0].role
             }
             createdToken = await createToken(tokenData);
-            res.cookie('token', createdToken);
+            res.cookie('token', createdToken, {
+                httpOnly: true,
+                maxAge: 1000 * 60 * 60 * 24 * 356
+            });
 
             console.log("Logged is SuccessFully.");
             res.status(201).json(responses.succeeded);
