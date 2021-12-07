@@ -75,13 +75,13 @@ exports.update_movie = async (req, res) =>{
 
 exports.delete_movie = async (req, res) =>{
     try{
-        if(!req.admin){
-            return res.status(401).send({status_code: 401, msg: "You don't have access to delete a movie."})
-        }
+        // if(!req.admin){
+        //     return res.status(401).send({status_code: 401, message: "You don't have access to delete a movie."})
+        // }
         movieName = req.params.name;
         delete_movie = await deleteMovie(movieName);
         if(delete_movie.deletedCount === 0){
-            return res.status(404).send({status_code: 404, error_msg: "Couldn't find the movie."});
+            return res.status(404).send({status_code: 404, message: "Couldn't find the movie."});
         }
         res.status(201).send({status_code: 201, message: "Have Successfully Deleted the Movie"});
 
