@@ -18,7 +18,7 @@ router.get('/search', search_movie);
 router.put('/update-movie', user_auth_for_movie, movieValidation, update_movie);
 
 //delete a movie
-// router.delete('/delete-movie/:name', auth_for_users, delete_movie);
-router.delete('/delete-movie/:name', delete_movie);
+router.delete('/delete-movie/:name', auth_for_users, delete_movie);
+// router.delete('/delete-movie/:name', delete_movie);
 
 module.exports = router;

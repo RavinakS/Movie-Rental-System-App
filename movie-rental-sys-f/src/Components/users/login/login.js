@@ -23,9 +23,9 @@ const Login = () =>{
         let {email, password} = user;
         if(email, password){
             try{
-                let res = await axios.post('http://localhost:3040/login', user);
+                let res = await axios.post('/login', user);
                 alert(res.data.message);
-                navigate('/movie-page');
+                navigate('/user-movie-page');
             }catch(err){
                 alert(err.response.data.message);
             }

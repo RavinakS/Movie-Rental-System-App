@@ -39,7 +39,8 @@ exports.auth_for_rent = async function(req, res, next) {
 
 exports.auth_for_users = async function(req, res, next){
     try{
-        let token = req.headers.cookie.split('=')[1];
+        let token = req.cookie.token
+        console.log(token);
         userInfo = await verifyToken(token);
         user_role = userInfo.role.toLowerCase();
         if(user_role === 'admin'){
@@ -49,7 +50,7 @@ exports.auth_for_users = async function(req, res, next){
         req.admin = false;
         return next();
     }catch(err){
-        console.log(err);
-        res.send(err);
+        console.log("token_not_found");
+        res.send("token_not_found");
     }
 }
