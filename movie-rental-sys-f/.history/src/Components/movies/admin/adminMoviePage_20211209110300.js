@@ -45,9 +45,9 @@ export default function AdminMoviepage(){
         <>
             <header>
                 <h1 className="text-center text-success my-5" >Movies</h1>
-                {/* <div className="container">
+                <div className="container">
                     <Col className="btn btn-primary" md={{ span: 2, offset: 10 }} onClick={() => {navigate('/add-movie')}}>Add Movie</Col>   
-                </div> */}
+                </div>
             </header>
             <div className="container">
                 <div className="row">

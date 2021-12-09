@@ -24,7 +24,7 @@ const Homepage = () =>{
                 console.log(res.data);
                 navigate('/login');
             }
-            else if(res.data === true){
+            if(res.data === true){
                 navigate('/admin-movie-page');
             }else{
                 navigate('/user-movie-page');

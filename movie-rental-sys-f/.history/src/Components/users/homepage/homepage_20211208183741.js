@@ -6,25 +6,21 @@ import axios from "axios";
 
 const Homepage = () =>{
     let navigate = useNavigate();
-    let [token, setToken] = useCookies(['token']);
+    let [token, setToken] = useCookies("");
 
-    // let config = {
-    //     url: '/get-token',
-    //     headers: {
-    //         cookie: token
-    //     }
-    // }
+    let config = {
+        method: 'post',
+        url: '/get-token',
+        headers: {
+            'Cookie': 
+        }
+    }
 
     let checkUser = () => {
-        setToken('token', token);
-
-        axios.post('/get-token', {headers: {cookie: token}})
+        setToken('token', token, {path: '/'});
+        axios.post('/get-token')
         .then((res)=>{
-            if(res.data === 'noToken'){
-                console.log(res.data);
-                navigate('/login');
-            }
-            else if(res.data === true){
+            if(res.data === true){
                 navigate('/admin-movie-page');
             }else{
                 navigate('/user-movie-page');

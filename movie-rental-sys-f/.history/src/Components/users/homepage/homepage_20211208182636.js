@@ -1,30 +1,16 @@
 import React from "react";
 import './homepage.css';
 import { useNavigate } from "react-router";
-import { useCookies } from "react-cookie";
+import { }
 import axios from "axios";
 
 const Homepage = () =>{
     let navigate = useNavigate();
-    let [token, setToken] = useCookies(['token']);
-
-    // let config = {
-    //     url: '/get-token',
-    //     headers: {
-    //         cookie: token
-    //     }
-    // }
 
     let checkUser = () => {
-        setToken('token', token);
-
-        axios.post('/get-token', {headers: {cookie: token}})
+        axios.post('/get-token')
         .then((res)=>{
-            if(res.data === 'noToken'){
-                console.log(res.data);
-                navigate('/login');
-            }
-            else if(res.data === true){
+            if(res.data === true){
                 navigate('/admin-movie-page');
             }else{
                 navigate('/user-movie-page');

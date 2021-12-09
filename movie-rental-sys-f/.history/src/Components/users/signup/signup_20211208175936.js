@@ -25,7 +25,7 @@ export default function Signup(){
         const {name, email, password} = user;
         if(name && email && password){
             try{
-                let res = await axios.post("/create-account", user);
+                let res = await axios.post("http://localhost:3040/create-account", user);
                 alert(res.data.status_code);
                 navigate('/movie-page');
             }catch(error){

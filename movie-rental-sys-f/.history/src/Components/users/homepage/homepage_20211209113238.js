@@ -20,11 +20,11 @@ const Homepage = () =>{
 
         axios.post('/get-token', {headers: {cookie: token}})
         .then((res)=>{
-            if(res.data === 'noToken'){
-                console.log(res.data);
+            console.log(res.data);
+            if(res.data === "noToken"){
                 navigate('/login');
             }
-            else if(res.data === true){
+            if(res.data === true){
                 navigate('/admin-movie-page');
             }else{
                 navigate('/user-movie-page');

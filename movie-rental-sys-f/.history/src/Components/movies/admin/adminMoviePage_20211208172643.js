@@ -3,7 +3,7 @@ import axios from "axios";
 import * as moment from "moment";
 import './adminMoviePage.css';
 import { useNavigate } from "react-router";
-// import { Col } from "react-bootstrap";
+import { Col } from "react-bootstrap";
 
 export default function AdminMoviepage(){
     let navigate = useNavigate();
@@ -11,7 +11,7 @@ export default function AdminMoviepage(){
     let [movies, setMovies] = useState([]);
 
     let moviePage = () =>{
-        axios.get('/all-movies')
+        axios.get('http://localhost:3040/all-movies')
         .then((response) => {
             setMovies(response.data.data);
         })
@@ -22,7 +22,7 @@ export default function AdminMoviepage(){
 
     let handleClick = (m_name) => {
         console.log("movieName is:", m_name);
-        axios.delete(`/delete-movie/${m_name}`)
+        axios.delete(`http://localhost:3040/delete-movie/${m_name}`)
         .then((res)=>{
             if(res.data === "token_not_found"){
                 navigate('/login');
@@ -45,9 +45,9 @@ export default function AdminMoviepage(){
         <>
             <header>
                 <h1 className="text-center text-success my-5" >Movies</h1>
-                {/* <div className="container">
+                <div className="container">
                     <Col className="btn btn-primary" md={{ span: 2, offset: 10 }} onClick={() => {navigate('/add-movie')}}>Add Movie</Col>   
-                </div> */}
+                </div>
             </header>
             <div className="container">
                 <div className="row">

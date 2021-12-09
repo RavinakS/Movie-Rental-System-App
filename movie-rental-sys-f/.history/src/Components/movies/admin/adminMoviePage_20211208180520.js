@@ -3,7 +3,7 @@ import axios from "axios";
 import * as moment from "moment";
 import './adminMoviePage.css';
 import { useNavigate } from "react-router";
-// import { Col } from "react-bootstrap";
+import { Col } from "react-bootstrap";
 
 export default function AdminMoviepage(){
     let navigate = useNavigate();
@@ -13,7 +13,7 @@ export default function AdminMoviepage(){
     let moviePage = () =>{
         axios.get('/all-movies')
         .then((response) => {
-            setMovies(response.data.data);
+            setMovies(response.data);
         })
         .catch(err => alert(err.response))
     }
@@ -45,9 +45,9 @@ export default function AdminMoviepage(){
         <>
             <header>
                 <h1 className="text-center text-success my-5" >Movies</h1>
-                {/* <div className="container">
+                <div className="container">
                     <Col className="btn btn-primary" md={{ span: 2, offset: 10 }} onClick={() => {navigate('/add-movie')}}>Add Movie</Col>   
-                </div> */}
+                </div>
             </header>
             <div className="container">
                 <div className="row">
