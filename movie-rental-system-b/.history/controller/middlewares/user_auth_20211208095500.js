@@ -39,7 +39,7 @@ exports.auth_for_rent = async function(req, res, next) {
 
 exports.auth_for_users = async function(req, res, next){
     try{
-        let token = req.headers.cookie.split('=')[1];
+        let token = req.cookie.token
         console.log(token);
         userInfo = await verifyToken(token);
         user_role = userInfo.role.toLowerCase();

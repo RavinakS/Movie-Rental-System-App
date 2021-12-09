@@ -1,6 +1,6 @@
 const {allMovies, addMovie, searchMovie, updateMovie, deleteMovie, getMovieByName} = require('../services/movies.services');
 const {responses, error_messages} = require('../controller/utils/constants');
-const {verifyToken} = require('./utils/token');
+const {verifyToken} = require('')
 
 exports.search_movie = async (req, res) =>{
     data = req.query;
@@ -90,20 +90,21 @@ exports.delete_movie = async (req, res) =>{
 }
 
 exports.get_token = async (req, res) =>{
-    let token = req.headers.cookie.split('=')[1];
-    userInfo = await verifyToken(token);
-
-    if(userInfo === 'err'){
-        console.log("Hiii");
-        res.send("noToken");
-        return;
-    }
-    user_role = userInfo.role.toLowerCase();
-    if(user_role === 'admin'){
-        res.send(true);
-        return;
-    }else{
+    try{
+        let token = req.headers.cookie.split('=')[1];
+        console.log(token);
+        userInfo = await verifyToken(token);
+        console.log(userInfo);
+        user_role = userInfo.role.toLowerCase();
+        if(user_role === 'admin'){
+            console.log("Admin yaar");
+            res.send(true);
+            return;
+        }
         res.send(false);
         return;
+    }catch(err){
+        console.log(err);
+        res.send("token_not_found");
     }
 }

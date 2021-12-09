@@ -3,7 +3,7 @@ require('./model/dbConnection.model');
 const cookieParser = require('cookie-parser');
 const express = require('express');
 const app = express();
-app.use(cookieParser());
+//app.use(cookieParser);
 
 const cors = require('cors');
 app.use(cors());

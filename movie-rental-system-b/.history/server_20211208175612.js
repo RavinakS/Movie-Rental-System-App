@@ -3,7 +3,7 @@ require('./model/dbConnection.model');
 const cookieParser = require('cookie-parser');
 const express = require('express');
 const app = express();
-app.use(cookieParser());
+app.use(cookieParser);
 
 const cors = require('cors');
 app.use(cors());
@@ -25,6 +25,6 @@ app.use('/', rents);
 const pagination = require('./routes/pagination.routes');
 app.use('/', pagination);
 
-app.listen(3040, '127.0.0.1', (req, res)=>{
+app.listen(3040, '', (req, res)=>{
     console.log("3040 Server is on..");
 })

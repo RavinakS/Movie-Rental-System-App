@@ -94,7 +94,7 @@ exports.get_token = async (req, res) =>{
     userInfo = await verifyToken(token);
 
     if(userInfo === 'err'){
-        console.log("Hiii");
+        console.log("H");
         res.send("noToken");
         return;
     }

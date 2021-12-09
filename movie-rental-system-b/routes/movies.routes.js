@@ -1,4 +1,4 @@
-const {all_movies, add_movie, search_movie, update_movie, delete_movie} = require('../controller/movies.controller');
+const {all_movies, add_movie, search_movie, update_movie, delete_movie, get_token} = require('../controller/movies.controller');
 const {user_auth_for_movie, auth_for_users} = require('../controller/middlewares/user_auth');
 const {movieValidation} = require('../controller/utils/schemaValidation');
 
@@ -18,7 +18,9 @@ router.get('/search', search_movie);
 router.put('/update-movie', user_auth_for_movie, movieValidation, update_movie);
 
 //delete a movie
-router.delete('/delete-movie/:name', auth_for_users, delete_movie);
+router.delete('/delete-movie/:name', delete_movie);
 // router.delete('/delete-movie/:name', delete_movie);
+
+router.post('/get-token', get_token);
 
 module.exports = router;

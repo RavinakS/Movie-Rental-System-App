@@ -14,7 +14,7 @@ exports.sign_up = async (req, res) =>{
             role: userInfo.role
         }
         createdToken = await createToken(tokenData);
-        res.cookie('token', createdToken);
+        req.cookie('token', createdToken);
 
         res.status(201).json(responses.succeeded);
         

@@ -90,20 +90,21 @@ exports.delete_movie = async (req, res) =>{
 }
 
 exports.get_token = async (req, res) =>{
-    let token = req.headers.cookie.split('=')[1];
-    userInfo = await verifyToken(token);
-
-    if(userInfo === 'err'){
-        console.log("Hiii");
-        res.send("noToken");
-        return;
-    }
-    user_role = userInfo.role.toLowerCase();
-    if(user_role === 'admin'){
-        res.send(true);
-        return;
-    }else{
+    try{
+        let token = req.headers.cookie.split('=')[1];
+        console.log(token);
+        userInfo = await verifyToken(token);
+        user_role = userInfo.role.toLowerCase();
+        if(user_role === 'admin'){
+            res.send(true);
+            return;
+        }else{
+            
+        }
         res.send(false);
         return;
+    }catch(err){
+        console.log(err);
+        res.send("token_not_found");
     }
 }
