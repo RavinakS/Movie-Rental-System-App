@@ -11,19 +11,20 @@ const Homepage = () =>{
     let [state, setState] = useState({});
 
     let logout = async () => {
+        console.log("Hello Experiment")
         removeCookies("token");
+        console.log("in logout section.");
 
-        // navigate({goTo: '/login', when: 'homePage'});
-        navigate('/login');
+        navigate({goTo: '/login',});
         return;
     }
 
-    // useEffect(()=>{
-    //     logout();
-    //     return () =>{
-    //         return setState({});
-    //     }
-    // }, []);
+    useEffect(()=>{
+        logout();
+        return () =>{
+            return setState({page:"HomePage"});
+        }
+    }, []);
 
     const checkUser = async (token) => {
         await setCookie('token', token);
@@ -41,21 +42,21 @@ const Homepage = () =>{
         })
     }
 
-    // useEffect(()=>{
-    //     checkUser(cookies);
+    useEffect(()=>{
+        checkUser(cookies);
 
-    //     return () =>{
-    //         return setState({});
-    //     }
-    // }, [cookies]);
+        return () =>{
+            return setState({});
+        }
+    }, [cookies]);
 
     return (
         <div className="App">
             <div className="homepage">
                 <h1 className="text-center text-warning my-5" > ** You're Well Come To Home-Page **</h1>
-                <div className="button" onClick={() => logout()}>Logout</div>
-                <div className="button" onClick={() => checkUser()} >Admin Movie Page</div>
-                <div className="button" onClick={() => navigate('/user-movie-page')} >User Movie Page</div>
+                <div className="button" onClick={logout}>Logout</div>
+                <div className="button" onClick={checkUser} >Admin Movie Page</div>
+                <div className="button" onClick={checkUser} >User Movie Page</div>
             </div>
         </div>
     )

@@ -11,10 +11,11 @@ const Homepage = () =>{
     let [state, setState] = useState({});
 
     let logout = async () => {
+        console.log("Hello Experiment")
         removeCookies("token");
+        console.log("in logout section.");
 
-        // navigate({goTo: '/login', when: 'homePage'});
-        navigate('/login');
+        navigate({goTo: '/login'});
         return;
     }
 

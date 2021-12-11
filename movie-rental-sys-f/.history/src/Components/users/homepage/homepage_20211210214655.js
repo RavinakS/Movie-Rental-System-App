@@ -11,10 +11,11 @@ const Homepage = () =>{
     let [state, setState] = useState({});
 
     let logout = async () => {
+        console.log("Hello Experiment")
         removeCookies("token");
+        console.log("in logout section.");
 
-        // navigate({goTo: '/login', when: 'homePage'});
-        navigate('/login');
+        navigate({goTo: '/login', when: 'homePage'});
         return;
     }
 
@@ -53,7 +54,7 @@ const Homepage = () =>{
         <div className="App">
             <div className="homepage">
                 <h1 className="text-center text-warning my-5" > ** You're Well Come To Home-Page **</h1>
-                <div className="button" onClick={() => logout()}>Logout</div>
+                <div className="button" onClick={logout()}>Logout</div>
                 <div className="button" onClick={() => checkUser()} >Admin Movie Page</div>
                 <div className="button" onClick={() => navigate('/user-movie-page')} >User Movie Page</div>
             </div>

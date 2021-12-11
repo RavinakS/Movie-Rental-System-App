@@ -12,6 +12,7 @@ const Homepage = () =>{
 
     let logout = async () => {
         removeCookies("token");
+        console.log("in logout section.");
 
         // navigate({goTo: '/login', when: 'homePage'});
         navigate('/login');

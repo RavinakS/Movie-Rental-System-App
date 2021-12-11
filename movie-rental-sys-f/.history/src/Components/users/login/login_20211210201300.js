@@ -26,12 +26,12 @@ const Login = () => {
             })
     }
 
-    // useEffect(()=>{
-    //     checkUser();
-    //     return () =>{
-    //         return setState({});
-    //     }
-    // }, [state]);
+    useEffect(()=>{
+        checkUser();
+        return () =>{
+            return setState({});
+        }
+    }, [state]);
 
     const [user, setUser] = useState({
         email: "",
