@@ -65,15 +65,21 @@ exports.login = async (req, res)=>{
 exports.logout = async (req, res) => {
     try{
         let token = req.headers.cookie.split('=')[1];
-        console.log(req.headers.cookie, "nothing yaa");
+        tokenLength = token.length;
 
+        let check = token[tokenLength-3] + token[tokenLength-2] + token[tokenLength-1];
+        if(check === '%7D'){
+            console.log("I am stuck here.");
+            res.cookie('token', '', { maxAge: 0, withCredentials: true });
+            res.send("You are not looged in.");
+            return;
+        }
         userInfo = await verifyToken(token);
-        res.cookie('token', '', { maxAge: 0 });
+        res.cookie('token', '', { maxAge: 0, withCredentials: true });
         res.status(200).json("Bye Bye!!");
 
     }catch(err){
-        console.log("I am stuck here.");
-        res.send("You are not looged in.");
+        console.log(err);
     }
 }
 
