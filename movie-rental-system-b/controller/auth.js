@@ -2,7 +2,7 @@ const {verifyToken} = require('./utils/token');
 
 exports.get_token = async (req, res) =>{
     let token = req.headers.cookie.split('=')[1];
-    console.log(token);
+    // console.log(token);
     userInfo = await verifyToken(token);
 
     if(userInfo === 'err'){

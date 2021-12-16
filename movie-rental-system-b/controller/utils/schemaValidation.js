@@ -24,8 +24,9 @@ exports.movieValidation = async (req, res, next) =>{
         avalCD: Joi.number().required()
     })
 
-    let validated = await schema.validate(req.query);
+    let validated = await schema.validate(req.body);
     if(validated.error){
+        console.log("Hiiii");
         res.status(400).send({status_code: 400, message: validated.error.details[0].message});
     }else{
         req.validated = true;

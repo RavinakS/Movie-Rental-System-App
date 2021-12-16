@@ -7,6 +7,7 @@ exports.user_auth_for_movie = async function(req, res, next){
         userInfo = await verifyToken(token);
 
         role = userInfo["role"].toLowerCase();
+        console.log(role);
         if(role === 'admin'){
             req.admin = req.query;
             next()

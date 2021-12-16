@@ -44,13 +44,13 @@ exports.login = async (req, res)=>{
                 role: userData[0].role
             }
             createdToken = await createToken(tokenData);
-            res.cookie('token', createdToken, {
-                httpOnly: true,
-                maxAge: 1000 * 60 * 60 * 24 * 356
-            });
+            // res.cookie('token', createdToken, {
+            //     httpOnly: true,
+            //     maxAge: 1000 * 60 * 60 * 24 * 356
+            // });
 
             console.log("Logged is SuccessFully.");
-            res.status(201).json(responses.succeeded);
+            res.status(200).json(tokenData);
         }else{
             console.log(error_messages.wrong_pass);
             res.status(400).json(error_messages.wrong_pass);

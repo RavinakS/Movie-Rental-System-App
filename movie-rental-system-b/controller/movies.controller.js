@@ -30,14 +30,16 @@ exports.all_movies = async (req, res) =>{
 
 
 exports.add_movie = async (req, res) =>{
-    movieDetails = req.admin;
+    movieDetails = req.body;
+
     try{
         added = await addMovie(movieDetails);
         res.status(201).send(responses.succeeded);
     }catch(err){
-        if(err.name === "MongoServerError" && err.code === 11000){ 
-            return res.status(500).send(error_messages.server_error);
-        }
+        // if(err.name === "MongoServerError" && err.code === 11000){ 
+        //     return res.status(500).send(error_messages.server_error);
+        // }
+        console.log(err);
         return res.send(err);
     }
 
@@ -45,10 +47,10 @@ exports.add_movie = async (req, res) =>{
 
 exports.update_movie = async (req, res) =>{
     try{ 
-        let {name, releasDate, genre, avalCD} = req.query;
+        let {name, releasDate, genre, avalCD} = req.body;
         movieDetails = await getMovieByName(name);
         if(movieDetails===null){
-            return res.status(404).send({status_code: 404, error_msg: "Couldn't find the movie."})
+            return res.status(404).json({status_code: 404, message: "Couldn't find the movie."})
         }
         let rents = movieDetails.avalCD;
         let newRents = parseInt(avalCD);
@@ -58,11 +60,12 @@ exports.update_movie = async (req, res) =>{
                 releasDate: releasDate, 
                 genre: genre,
             }
-            update = await updateMovie(name, updates, newRents);
+            let update = await updateMovie(name, updates, newRents);
+            
             // if(update.matchedCount===0){
             //     return res.status(404).send({status_code: 404, error_msg: "Couldn't find the movie."})
             // }
-            res.status(201).send({status_code: 201, message: "Updated Successfully."});
+            res.status(201).send({status_code: 200, message: "Updated Successfully."});
         }else{
             res.status(408).send({status_code: 408, message: `available CDs should be >= ${rents}`});
         }
