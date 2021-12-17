@@ -1,4 +1,5 @@
 const { movies } = require('../model/movies.model');
+// const { rents } = require('../model/rents.model')
 
 exports.allMovies = () =>{
     return movies.find();
@@ -31,4 +32,15 @@ exports.deleteMovie = (m_name) =>{
 
 exports.updateMovieRents = (m_name, inc_num) =>{
     return movies.updateOne({name: m_name}, {$inc: {avalCD: inc_num}});
+}
+
+exports.rentsDetails = (m_name) =>{
+    return movies.aggregate([{
+        $group: {
+            from: "rents",
+            localField: "name",
+            foreignField: "name",
+            as: "rentsDetail"
+        }
+    }])
 }

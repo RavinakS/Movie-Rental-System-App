@@ -1,6 +1,23 @@
 const {verifyToken} = require('../utils/token');
 const {responses, error_messages} = require('../utils/constants');
 
+exports.authentication = async function(req, res, next){
+    try{
+        token = req.headers.cookie.split("=")[1];
+        userInfo = await verifyToken(token);
+        role = userInfo["role"].toLowerCase();
+        if(role === 'admin'){
+            console.log(userInfo);
+            next()
+        }else{
+            res.status(401).send(error_messages.un_authorized);
+        }
+    }catch(err){
+        res.status(404).send(error_messages.login_page);
+    }
+}
+
+
 exports.user_auth_for_movie = async function(req, res, next){
     try{
         token = req.headers.cookie.split("=")[1];
@@ -15,8 +32,6 @@ exports.user_auth_for_movie = async function(req, res, next){
             res.status(401).send(error_messages.un_authorized);
         }
     }catch(err){
-
-        // user needs to login (retun to login page)
         res.status(404).send(error_messages.login_page);
     }
 }

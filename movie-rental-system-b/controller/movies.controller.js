@@ -1,4 +1,4 @@
-const {allMovies, addMovie, searchMovie, updateMovie, deleteMovie, getMovieByName} = require('../services/movies.services');
+const {allMovies, addMovie, searchMovie, updateMovie, deleteMovie, getMovieByName, rentsDetails} = require('../services/movies.services');
 const {responses, error_messages} = require('../controller/utils/constants');
 
 exports.search_movie = async (req, res) =>{
@@ -90,3 +90,21 @@ exports.delete_movie = async (req, res) =>{
         res.send(err)
     }
 }
+
+// exports.rentsDetails = async (req, res) =>{
+//     try{
+//         let movie_name = req.params.name;
+//         let getRentsDetails = await rentsDetails(movie_name);
+//         console.log(getRentsDetails);
+//         if(getRentsDetails.length === 0){
+//             res.status(404).send({status_code: 404, message: "Couldn't find the movie."});
+//         }else{
+//             console.log(getRentsDetails);
+//             res.status(200).send(getRentsDetails);
+//         }
+//     }catch(err){
+//         console.log(err);
+//         res.send(err);
+//     }
+
+// }

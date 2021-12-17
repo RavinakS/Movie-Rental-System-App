@@ -5,7 +5,7 @@ exports.signUp = (userData) =>{
 }
 
 exports.userDetailsById = (user_id) =>{
-    return users.find({email: user_id}, {email:1, password:1, role:1, rent:1});
+    return users.find({email: user_id}, {email:1, password:1, role:1, rent:1, _id:1});
 }
 
 exports.profile = (user_id) =>{

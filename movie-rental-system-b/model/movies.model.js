@@ -7,7 +7,9 @@ const moviesTableSchema = new Schema({
     name: {type: String, unique: true, dropDups: true},
     releasDate: {type: Date},
     genre: {type: String},
-    avalCD: {type: Number}
+    avalCD: {type: Number},
+    rents: [{type: Schema.Types.ObjectId, ref:'rents'}],
+    user_id:{type:Schema.Types.ObjectId ,ref:"users"}
 });
 
 exports.movies = Model('movies', moviesTableSchema);

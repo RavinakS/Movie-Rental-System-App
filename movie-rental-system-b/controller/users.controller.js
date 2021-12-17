@@ -44,10 +44,10 @@ exports.login = async (req, res)=>{
                 role: userData[0].role
             }
             createdToken = await createToken(tokenData);
-            // res.cookie('token', createdToken, {
-            //     httpOnly: true,
-            //     maxAge: 1000 * 60 * 60 * 24 * 356
-            // });
+            res.cookie('token', createdToken, {
+                httpOnly: true,
+                maxAge: 1000 * 60 * 60 * 24 * 356
+            });
 
             console.log("Logged is SuccessFully.");
             res.status(200).json(tokenData);
@@ -99,9 +99,6 @@ exports.user_profile = async (req, res) =>{
 
 exports.allUsersInfo = async (req, res) =>{
     try{
-        if(!req.admin){
-            return res.status(401).json(error_messages.un_authorized);
-        }
         usersData = await allUsersData();
         res.status(200).json({status_code: 200, data: usersData});
     }catch(err){
