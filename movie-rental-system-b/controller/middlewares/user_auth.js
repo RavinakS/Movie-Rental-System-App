@@ -48,7 +48,7 @@ exports.auth_for_rent = async function(req, res, next) {
         req.user = userInfo;
         next()
     }catch(err){
-        res.status(404).send('** Login/Signup **');
+        res.status(404).send('login');
         next();
     }
 }

@@ -5,7 +5,7 @@ const {auth_for_rent, auth_for_users} = require('../controller/middlewares/user_
 const {isMovieRentExist} = require('../controller/middlewares/isMovieRentExist');
 
 // buy a movie
-router.post('/rent-movie', auth_for_rent, isMovieRentExist, buyMovie);
+router.post('/rent-movie/:name', auth_for_rent, isMovieRentExist, buyMovie);
 
 // view rent details of a particuler user
 router.get('/user-rent', auth_for_users, viewUserRents);

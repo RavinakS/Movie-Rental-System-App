@@ -9,7 +9,7 @@ exports.userDetailsById = (user_id) =>{
 }
 
 exports.profile = (user_id) =>{
-    return users.find({email: user_id}, {name:1, email:1, rent:1, role:1});
+    return users.find({email: user_id}, {name:1, email:1, rent:1, role:1, _id:1});
 }
 
 exports.updateUserRent = (user, rents) =>{

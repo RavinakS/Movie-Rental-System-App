@@ -1,7 +1,7 @@
 const {findRentsByMovieName} = require('../../services/rents.services');
 
 exports.isMovieRentExist = async (req, res, next) =>{
-    let movieName = req.body.name;
+    let movieName = req.params.name;
     let user_id = req.user.email;
     if(movieName === undefined){
         return res.status(400).send("Please provide the movie name.");

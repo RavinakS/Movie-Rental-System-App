@@ -1,0 +1,17 @@
+.card-header{
+    background-color: rgb(159, 204, 101);
+}
+
+.btn{
+    margin-right: -10px;
+    margin-bottom: 5px !important;
+    background-color: rgb(199, 134, 134);
+}
+
+.paginationBttns {
+    width: 80%;
+    height: 40px;
+    list-style: none;
+    display: flex;
+    justi
+}

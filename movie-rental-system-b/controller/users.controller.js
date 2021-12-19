@@ -1,6 +1,7 @@
 const {signUp, userDetailsById, profile, allUsersData} = require('../services/users.services');
 const {createToken, verifyToken} = require('./utils/token');
 const {error_messages, responses} = require('./utils/constants');
+const { findRentsByUserID } = require('../services/rents.services');
 
 exports.sign_up = async (req, res) =>{
     try{
@@ -87,11 +88,24 @@ exports.user_profile = async (req, res) =>{
     try{
         let token = req.headers.cookie.split('=')[1];
         tokenData = await verifyToken(token);
+
         userInfo = await profile(tokenData.email);
-        if(userInfo.length === 0){
-            return res.status(404).json(error_messages.login_page);
+
+        userRents = await findRentsByUserID(tokenData.email);
+
+        let view_profile = []
+        if(userInfo.length != 0){
+            if(userRents.length != 0){
+                view_profile.push(userInfo)
+                view_profile.push(userRents)
+                return res.status(200).json({view_profile});
+            }else{
+                return res.status(200).json(userInfo);
+            }
+        }else{
+        res.status(404).json("no_user");
         }
-        res.status(200).json({status_code: 200, data: userInfo})
+        
     }catch(err){
         res.send(err);
     }
@@ -100,7 +114,7 @@ exports.user_profile = async (req, res) =>{
 exports.allUsersInfo = async (req, res) =>{
     try{
         usersData = await allUsersData();
-        res.status(200).json({status_code: 200, data: usersData});
+        res.status(200).json(usersData);
     }catch(err){
         res.send(err);
     }

@@ -5,7 +5,7 @@ const {error_messages, responses} = require('./utils/constants');
 
 // Buy a movie
 exports.buyMovie = async (req, res) =>{
-    let movieName = req.body.name;
+    let movieName = req.params.name;
     let auth_data = req.user;
     if(movieName === undefined){
         return res.status(400).send(error_messages.required);
@@ -30,7 +30,6 @@ exports.buyMovie = async (req, res) =>{
                 if(movie_details === null){
                     return res.status(404).send(error_messages.not_exist);
                 } 
-                console.log("03030330")
 
                 let rent_details = {
                     user_id: user_details[0]._id,
@@ -42,11 +41,7 @@ exports.buyMovie = async (req, res) =>{
                     movie_id: movie_details._id
                 };
 
-                console.log("0909090909")
-
                 added = await addRent(rent_details);
-
-                console.log("09090909099999999999999999999")
 
 
                 // update the rent field of the user to +1
@@ -58,9 +53,10 @@ exports.buyMovie = async (req, res) =>{
 
                 return res.status(200).send(responses.succeeded);
             }
-            return res.status(403).send(error_messages.al_exist);
+            return res.status(403).send("taken");
         }
-        res.status(503).send(error_messages.server_err_down_mtnce);
+        // res.status(503).send(error_messages.server_err_down_mtnce);
+        return res.status(503).send({ message: "notAval"});
 
     }catch(err){
         console.log(err);
