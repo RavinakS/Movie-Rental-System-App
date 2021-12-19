@@ -1,0 +1,46 @@
+.card-header{
+    background-color: rgb(159, 204, 101);
+}
+
+.btn{
+    margin-right: -10px;
+    margin-bottom: 5px !important;
+    background-color: rgb(199, 134, 134);
+}
+
+#admin{
+    background:"green";
+}
+
+.paginationBttns {
+    width: 80%;
+    height: 40px;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px !important;
+    margin-bottom: 0%;
+}
+
+.paginationBttns a {
+    padding: 2px;
+    margin: 4px;
+    border-radius: 5px;
+    border: 1px solid #2b2;
+    color: #2b2;
+    cursor: pointer;
+}
+
+.paginationBttns a:hover {
+    color: white;
+    background-color: #2b2;
+}
+
+.paginationActive a {
+    color: white;
+    background-color: #2b2;
+}
+
+.container input {
+    width: 20;
+}
