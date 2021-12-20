@@ -60,7 +60,9 @@ exports.update_movie = async (req, res) =>{
                 releasDate: releasDate, 
                 genre: genre,
             }
-            let update = await updateMovie(name, updates, newRents);
+
+            const addRents = newRents - rents;
+            let update = await updateMovie(name, updates, addRents);
             
             // if(update.matchedCount===0){
             //     return res.status(404).send({status_code: 404, error_msg: "Couldn't find the movie."})

@@ -15,6 +15,7 @@ import UserProfile from './Components/movies/user/profile/profile';
 import Protected from './Protected';
 import AllUsers from './Components/movies/admin/allUsers/allUsers';
 import IsAuthenticated from './Auth';
+import IsAdmin from './AdminAuth';
 
 export default function App() {
 
@@ -57,7 +58,7 @@ export default function App() {
 
           <Route path='/create-account' element={ <Signup />} />
 
-          <Route path='/login' element={<IsAuthenticated/>}>
+          <Route path='/login' element={</>}>
             <Route path='/login' element={<Login />} />
           </Route>
 

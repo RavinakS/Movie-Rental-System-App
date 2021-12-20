@@ -16,6 +16,7 @@ import Protected from './Protected';
 import AllUsers from './Components/movies/admin/allUsers/allUsers';
 import IsAuthenticated from './Auth';
 
+
 export default function App() {
 
   function navButtons(){

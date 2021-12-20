@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 import Homepage from './Components/users/homepage/homepage';
@@ -18,37 +18,18 @@ import IsAuthenticated from './Auth';
 
 export default function App() {
 
-  function navButtons(){
-    const isAuthenticated = localStorage.getItem("isAuthenticated");
-    if(isAuthenticated){
-      return(
-        <div class="navbar-nav">
-          <a class="nav-item nav-link active" href='/' >Home</a>
-          <a class="nav-item nav-link active" href='/logout'>Logout</a>
-          <a class="nav-item nav-link active" href='/profile'>Profile</a>
-        </div>
-      )
-    }else{
-      return(
-        <div class="navbar-nav">
-          <a class="nav-item nav-link active" href='/' >Home</a>
-          <a class="nav-item nav-link active" href='/login'>Login</a>
-          <a class="nav-item nav-link active" href='/create-account'>Signup</a>
-        </div>
-      )
-    }
-  }
-
-  useEffect(()=>{
-    navButtons()
-  }, [])
+  function navButtons
 
   return (
    <>
       <Router>
       <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
         <div class="collapse navbar-collapse">
-            {navButtons()}
+            <div class="navbar-nav">
+              <a class="nav-item nav-link active" href='/' >Home</a>
+              <a class="nav-item nav-link active" href='/logout'>Logout</a>
+              <a class="nav-item nav-link active" href='/profile'>Profile</a>
+            </div>
           </div>
       </nav>
         

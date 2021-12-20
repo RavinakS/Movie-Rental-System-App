@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import React from 'react';
+import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
 
 import Homepage from './Components/users/homepage/homepage';
 import Login from './Components/users/login/login';
@@ -18,37 +18,16 @@ import IsAuthenticated from './Auth';
 
 export default function App() {
 
-  function navButtons(){
-    const isAuthenticated = localStorage.getItem("isAuthenticated");
-    if(isAuthenticated){
-      return(
-        <div class="navbar-nav">
-          <a class="nav-item nav-link active" href='/' >Home</a>
-          <a class="nav-item nav-link active" href='/logout'>Logout</a>
-          <a class="nav-item nav-link active" href='/profile'>Profile</a>
-        </div>
-      )
-    }else{
-      return(
-        <div class="navbar-nav">
-          <a class="nav-item nav-link active" href='/' >Home</a>
-          <a class="nav-item nav-link active" href='/login'>Login</a>
-          <a class="nav-item nav-link active" href='/create-account'>Signup</a>
-        </div>
-      )
-    }
-  }
-
-  useEffect(()=>{
-    navButtons()
-  }, [])
-
   return (
    <>
       <Router>
       <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
         <div class="collapse navbar-collapse">
-            {navButtons()}
+            <div class="navbar-nav">
+              <a class="nav-item nav-link active" href='/' >Home</a>
+              <a class="nav-item nav-link active" href='/logout'>Logout</a>
+              <a class="nav-item nav-link active" href='/profile'>Profile</a>
+            </div>
           </div>
       </nav>
         
@@ -57,9 +36,9 @@ export default function App() {
 
           <Route path='/create-account' element={ <Signup />} />
 
-          <Route path='/login' element={<IsAuthenticated/>}>
+          <Route path='/admin-movie-page' element={<Protected/>}
             <Route path='/login' element={<Login />} />
-          </Route>
+          <Route>
 
           <Route path = '/logout' element = {<Logout />} />
 
@@ -71,21 +50,13 @@ export default function App() {
             <Route  path='/admin-movie-page' element={<AdminMoviepage />}/>
           </Route>
 
-          <Route path='/movies/add-movie' element={<Protected/>}>
-            <Route path='/movies/add-movie' element = {<Addmovie />} />
-          </Route>
+          <Route path='/movies/add-movie' element = {<Addmovie />} />
 
-          <Route path='/movies/update-movie' element={<Protected/>}>
-            <Route path='/movies/update-movie' element = {<UpdateMovie />} />
-          </Route>
+          <Route path='/movies/update-movie' element = {<UpdateMovie />} />
 
-          <Route path='/rent-details' element={<Protected/>}>
-            <Route path='/rent-details' element = {<MovieRentsDetails />} />
-          </Route>
+          <Route path='/rent-details' element = {<MovieRentsDetails />} />
 
-          <Route path='/users' element={<Protected/>}>
-            <Route path='/users' element= {<AllUsers/>} />
-          </Route>
+          <Route path='/users' element= {<AllUsers/>} />
 
           <Route path='*' element={<ErrorPage />} />
         </Routes>

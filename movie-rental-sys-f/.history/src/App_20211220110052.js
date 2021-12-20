@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 import Homepage from './Components/users/homepage/homepage';
@@ -39,16 +39,12 @@ export default function App() {
     }
   }
 
-  useEffect(()=>{
-    navButtons()
-  }, [])
-
   return (
    <>
       <Router>
       <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
         <div class="collapse navbar-collapse">
-            {navButtons()}
+            {navButtons}
           </div>
       </nav>
         

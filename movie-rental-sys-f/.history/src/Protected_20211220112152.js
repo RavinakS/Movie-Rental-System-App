@@ -6,9 +6,8 @@ const ProtectedRoute = () => {
 
     if(role != null){
         return (role.toLowerCase() === "admin") ? <Outlet /> : <Navigate to="/user-movie-page" />;
-    }
 
-    return (role === "admin") ? <Outlet /> : <Navigate to="/user-movie-page" />;
+    }
 }
 
 export default ProtectedRoute;

@@ -15,6 +15,7 @@ import UserProfile from './Components/movies/user/profile/profile';
 import Protected from './Protected';
 import AllUsers from './Components/movies/admin/allUsers/allUsers';
 import IsAuthenticated from './Auth';
+import Is
 
 export default function App() {
 
