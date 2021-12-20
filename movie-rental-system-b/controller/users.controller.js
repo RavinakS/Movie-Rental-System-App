@@ -70,9 +70,9 @@ exports.logout = async (req, res) => {
 
         let check = token[tokenLength-3] + token[tokenLength-2] + token[tokenLength-1];
         if(check === '%7D'){
-            console.log("I am stuck here.");
             res.cookie('token', '', { maxAge: 0, withCredentials: true });
-            res.send("You are not looged in.");
+            res.status(404).send("You are not looged in.")
+            // res.send("You are not looged in.");
             return;
         }
         userInfo = await verifyToken(token);
