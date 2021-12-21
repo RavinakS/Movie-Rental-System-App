@@ -1,4 +1,4 @@
-const {allMovies, addMovie, searchMovie, updateMovie, deleteMovie, getMovieByName, rentsDetails} = require('../services/movies.services');
+const {allMovies, addMovie, searchMovie, updateMovie, deleteMovie, getMovieByName, rentsDetails, sortByReleasDate} = require('../services/movies.services');
 const {responses, error_messages} = require('../controller/utils/constants');
 
 exports.search_movie = async (req, res) =>{
@@ -90,6 +90,16 @@ exports.delete_movie = async (req, res) =>{
     }catch(err){
         console.log(err);
         res.send(err)
+    }
+}
+
+exports.sort_movies = async (req, res) => {
+    try{
+        const movies = await sortByReleasDate();
+        res.status(200).send(movies);
+    }catch(err){
+        console.log(err);
+        res.send(err);
     }
 }
 

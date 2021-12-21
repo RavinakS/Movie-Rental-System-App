@@ -44,3 +44,7 @@ exports.rentsDetails = (m_name) =>{
         }
     }])
 }
+
+exports.sortByReleasDate = () =>{
+    return movies.find().sort({releasDate: 1});
+}
